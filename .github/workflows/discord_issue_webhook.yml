@@ -12,7 +12,7 @@ jobs:
         uses: tsickert/discord-webhook@v7.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_ISSUE_WEBHOOK }}
-          username: 'GitHub Bot'
+          username: 'Capykit Issue Tracker'
           avatar-url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
           content: |
             📝 **Issue ${{ github.event.action }}**
