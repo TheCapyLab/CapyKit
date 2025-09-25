@@ -18,6 +18,9 @@ export default defineConfig({
     'versions/:version/(.*)': ':version/(.*)'
   },
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     nav: [
       { text: "GitHub", link: "https://github.com/capytec/capykit" }
     ],
