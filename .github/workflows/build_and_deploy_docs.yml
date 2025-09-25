@@ -108,7 +108,7 @@ jobs:
                   {
                     "title": "Deployment Started!",
                     "description": "The Github action is now deploying the docs to GitHub Pages.",
-                    "color": 16776960
+                    "color": 65280
                   }
                 ]
               }' \
@@ -119,7 +119,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build, deploy_start_webhook]
+    needs: build
+    if: needs.build.result == 'success'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
