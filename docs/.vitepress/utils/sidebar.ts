@@ -21,7 +21,7 @@ function formatName(name: string): string {
 
 /**
  * Auto-generated sidebar configuration
- * Generated on: 2025-09-25T08:46:47.854Z
+ * Generated on: 2025-09-25T16:24:39.628Z
  */
 export function getSidebarConfig(): SidebarConfig {
   return {

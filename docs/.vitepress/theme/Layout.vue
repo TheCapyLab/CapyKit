@@ -4,6 +4,7 @@
       <VersionSwitcher v-if="!isHomePage" />
     </template>
   </Layout>
+  <SidebarToggle v-if="!isHomePage" />
 </template>
 
 <script setup lang="ts">
@@ -11,6 +12,7 @@ import { computed } from "vue";
 import { useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import VersionSwitcher from "./components/VersionSwitcher.vue";
+import SidebarToggle from "./components/SidebarToggle.vue";
 
 const { Layout } = DefaultTheme;
 const { page } = useData();
