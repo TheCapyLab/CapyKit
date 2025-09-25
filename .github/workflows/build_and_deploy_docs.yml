@@ -18,17 +18,18 @@ jobs:
     steps:
       - name: Build Start Webhook
         run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d '{
-                "embeds": [
+          -d "{
+                \"embeds\": [
                   {
-                    "title": "Build Started!",
-                    "description": "The Github action for building and deploying the docs has started.",
-                    "color": 65280
+                    \"title\": \"🏗️ Build Started! - ${TIMESTAMP}\",
+                    \"description\": \"The Github action for building and deploying the docs has started.\",
+                    \"color\": 65280
                   }
                 ]
-              }' \
+              }" \
           "${{ secrets.WEBHOOK_URL }}"
 
   build:
@@ -79,41 +80,21 @@ jobs:
 
       - name: Build End Webhook
         run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           # Determine color based on build result
           if [ "${{ needs.build.result }}" == "success" ]; then
             COLOR=65280
-            STATUS="Success"
+            STATUS="✅ Success"
             DESCRIPTION="The Github action for building and deploying the docs has finished successfully."
           else
             COLOR=16711680
-            STATUS="Failed"
+            STATUS="❌ Failed"
             DESCRIPTION="The Github action for building and deploying the docs has failed."
           fi
 
-          curl -F "payload_json={\"embeds\":[{\"title\":\"Build ${STATUS}!\",\"description\":\"${DESCRIPTION}\",\"color\":${COLOR}}]}" \
+          curl -F "payload_json={\"embeds\":[{\"title\":\"🏗️ Build ${STATUS}! - ${TIMESTAMP}\",\"description\":\"${DESCRIPTION}\",\"color\":${COLOR}}]}" \
                -F "file=@logs/build.log" \
                "${{ secrets.WEBHOOK_URL }}"
-
-  deploy_start_webhook:
-    runs-on: ubuntu-latest
-    needs: build
-    if: needs.build.result == 'success'
-    steps:
-      - name: Deploy Start Webhook
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d '{
-                "embeds": [
-                  {
-                    "title": "Deployment Started!",
-                    "description": "The Github action is now deploying the docs to GitHub Pages.",
-                    "color": 65280
-                  }
-                ]
-              }' \
-          "${{ secrets.WEBHOOK_URL }}"
-
   deploy:
     environment:
       name: github-pages
@@ -122,35 +103,58 @@ jobs:
     needs: build
     if: needs.build.result == 'success'
     steps:
+      - name: Deploy Start Webhook
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{
+                \"embeds\": [
+                  {
+                    \"title\": \"🚀 Deployment Started! - ${TIMESTAMP}\",
+                    \"description\": \"The Github action is now deploying the docs to GitHub Pages.\",
+                    \"color\": 16776960
+                  }
+                ]
+              }" \
+          "${{ secrets.WEBHOOK_URL }}"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
   deploy_end_webhook:
     runs-on: ubuntu-latest
-    needs: [deploy, deploy_start_webhook]
-    if: always() && needs.deploy_start_webhook.result == 'success'
+    needs: [deploy, build]
+    if: always() && needs.build.result == 'success'
     steps:
       - name: Deploy End Webhook
         run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          START_TIME="${{ github.event.head_commit.timestamp }}"
+          CURRENT_TIME=$(date -u +%s)
+          START_TIME_SECONDS=$(date -d "$START_TIME" +%s)
+          TOTAL_TIME=$((CURRENT_TIME - START_TIME_SECONDS))
+          TOTAL_TIME_MIN=$((TOTAL_TIME / 60))
+          TOTAL_TIME_SEC=$((TOTAL_TIME % 60))
+
           # Determine color based on deploy result
           if [ "${{ needs.deploy.result }}" == "success" ]; then
             COLOR=65280
-            STATUS="Success"
-            DESCRIPTION="The docs have been successfully deployed to GitHub Pages!"
+            STATUS="✅ Success"
+            DESCRIPTION="The docs have been successfully deployed to GitHub Pages! Total time: ${TOTAL_TIME_MIN}m ${TOTAL_TIME_SEC}s"
             URL="${{ needs.deploy.outputs.page_url }}"
           else
             COLOR=16711680
-            STATUS="Failed"
-            DESCRIPTION="The deployment to GitHub Pages has failed."
+            STATUS="❌ Failed"
+            DESCRIPTION="The deployment to GitHub Pages has failed. Total time: ${TOTAL_TIME_MIN}m ${TOTAL_TIME_SEC}s"
             URL=""
           fi
 
           # Build JSON with conditional URL field
           if [ -n "$URL" ]; then
-            JSON_PAYLOAD="{\"embeds\":[{\"title\":\"Deployment ${STATUS}!\",\"description\":\"${DESCRIPTION}\",\"color\":${COLOR},\"url\":\"${URL}\"}]}"
+            JSON_PAYLOAD="{\"embeds\":[{\"title\":\"🚀 Deployment ${STATUS}! - ${TIMESTAMP}\",\"description\":\"${DESCRIPTION}\",\"color\":${COLOR},\"url\":\"${URL}\"}]}"
           else
-            JSON_PAYLOAD="{\"embeds\":[{\"title\":\"Deployment ${STATUS}!\",\"description\":\"${DESCRIPTION}\",\"color\":${COLOR}}]}"
+            JSON_PAYLOAD="{\"embeds\":[{\"title\":\"🚀 Deployment ${STATUS}! - ${TIMESTAMP}\",\"description\":\"${DESCRIPTION}\",\"color\":${COLOR}}]}"
           fi
 
           curl -H "Content-Type: application/json" \
