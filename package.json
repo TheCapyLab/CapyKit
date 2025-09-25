@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/TheCapyLab/CapyKit#readme",
   "scripts": {
+    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly --outDir dist && npm run generate:exports",
+    "component:exports:generate": "node scripts/generate-exports.js",
+    "component:exports:list": "node scripts/list-components.js",
+    "component:add": "node scripts/add-component.js",
+    "component:remove": "node scripts/remove-component.js",
     "docs:dev": "npm run docs:update-all && vitepress dev docs",
     "docs:build": "npm run docs:update-all && vitepress build docs",
     "docs:preview": "npm run docs:update-all && vitepress preview docs",
@@ -30,5 +35,19 @@
     "vitepress": "^1.6.4",
     "vue": "^3.5.21"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./plugin": {
+      "import": "./dist/plugin.js",
+      "types": "./dist/plugin.d.ts"
+    },
+    "./button": {
+      "import": "./dist/components/Button/index.js",
+      "types": "./dist/components/Button/index.d.ts"
+    }
+  }
 }
