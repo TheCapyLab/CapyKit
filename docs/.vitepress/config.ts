@@ -13,7 +13,7 @@ const versions = [
 export default defineConfig({
   title: "CapyKit",
   description: "Vue UI library",
-  base: "/CapyKit/",
+  base: "/",
   rewrites: {
     'versions/:version/(.*)': ':version/(.*)'
   },
