@@ -1,0 +1,18 @@
+name: Discord Issue Webhook Notification
+on:
+  issues:
+    types: [opened,edited,deleted,transferred,pinned,unpinned,closed,reopened,assigned,unassigned,labeled,unlabeled,locked,unlocked,milestoned,demilestoned]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Notification
+        uses: dawidd6/action-send-discord-webhook@v3
+        with:
+          webhook-url: ${{ secrets.DISCORD_ISSUE_WEBHOOK }}
+          content: |
+            📝 Issue **${{ github.event.issue.title }}** was **${{ github.event.action }}**
+            Repository: ${{ github.repository }}
+            Author: ${{ github.event.sender.login }}
+            Link: ${{ github.event.issue.html_url }}
