@@ -19,6 +19,11 @@
   "homepage": "https://github.com/TheCapyLab/CapyKit#readme",
   "scripts": {
     "build": "vite build && vue-tsc --declaration --emitDeclarationOnly --outDir dist && npm run generate:exports",
+    "dev:pack": "npm pack",
+    "dev:link" : "npm link @thecapylab/capykit",
+    "version:patch:increment": "node scripts/increment-version.js patch",
+    "version:minor:increment": "node scripts/increment-version.js minor",
+    "version:major:increment": "node scripts/increment-version.js major",
     "component:exports:generate": "node scripts/generate-exports.js",
     "component:exports:list": "node scripts/list-components.js",
     "component:add": "node scripts/add-component.js",
