@@ -1,7 +1,7 @@
-<template>
-  <div class="ck-button">
+﻿<template>
+  <button class="ck-button">
     <!-- TODO: implement Button -->
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">

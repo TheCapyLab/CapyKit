@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/TheCapyLab/CapyKit#readme",
   "scripts": {
-    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly --outDir dist && npm run generate:exports",
+    "build": "npm run component:exports:generate",
     "dev:pack": "npm pack",
-    "dev:link" : "npm link @thecapylab/capykit",
+    "dev:link": "npm link @thecapylab/capykit",
     "version:patch:increment": "node scripts/increment-version.js patch",
     "version:minor:increment": "node scripts/increment-version.js minor",
     "version:major:increment": "node scripts/increment-version.js major",
@@ -35,24 +35,5 @@
     "docs:update-versions": "node docs/build-scripts/update-versions.cjs",
     "docs:update-sidebar": "node docs/build-scripts/generate-sidebar.cjs",
     "docs:show-structure": "node docs/build-scripts/show-structure.cjs"
-  },
-  "devDependencies": {
-    "vitepress": "^1.6.4",
-    "vue": "^3.5.21"
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./plugin": {
-      "import": "./dist/plugin.js",
-      "types": "./dist/plugin.d.ts"
-    },
-    "./button": {
-      "import": "./dist/components/Button/index.js",
-      "types": "./dist/components/Button/index.d.ts"
-    }
   }
 }

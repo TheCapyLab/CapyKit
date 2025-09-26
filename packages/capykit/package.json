@@ -1,0 +1,15 @@
+{
+  "name": "capykit",
+  "version": "0.1.0",
+  "scripts": {
+  },
+  "author": "TheCapyLab",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@thecapylab/core": "^0.1.0"
+  },
+  "exports" : {
+    "./button" : "./button/Button.vue"
+  }
+}

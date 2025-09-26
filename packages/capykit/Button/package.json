@@ -1,0 +1,8 @@
+{
+    "main": "./Button.vue",
+    "module": "./Button.vue",
+    "types": "./Button.d.ts",
+    "sideEffects": [
+        "*.vue"
+    ]
+}
