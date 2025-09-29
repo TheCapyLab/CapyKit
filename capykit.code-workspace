@@ -1,0 +1,401 @@
+{
+  // create a terminal, one for each folder
+  "folders": [
+    { "name": "Root", "path": "." },
+    { "name": "Core", "path": "./packages/core" },
+    { "name": "Composables", "path": "./packages/composables" },
+    { "name": "Components", "path": "./packages/capykit" },
+    { "name": "Actions", "path": "./.github/workflows" },
+    { "name": "Docs", "path": "./docs" }
+  ],
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "octref.vetur",
+      "formulahendry.auto-close-tag",
+      "formulahendry.auto-rename-tag",
+      "Vue.volar"
+    ]
+  },
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/packs": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "terminal.integrated.tabs.enabled": true,
+    "terminal.integrated.tabs.showActions": "always",
+    "task.autoDetect": "on"
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🧹 Clean Project",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev:clean"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📦 Create Packs",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev:packs"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔢 Version: Patch Increment",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "version:patch:increment"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔢 Version: Minor Increment",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "version:minor:increment"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔢 Version: Major Increment",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "version:major:increment"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🎯 Version: Set Custom",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "version:set", "${input:customVersion}"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Start Dev Server",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:dev"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "new",
+          "showReuseMessage": false,
+          "clear": true
+        },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Build",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:build"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Preview",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:preview"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "new",
+          "showReuseMessage": false,
+          "clear": true
+        },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Update All",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:update-all"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Update Versions",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:update-versions"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Update Sidebar",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:update-sidebar"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Docs: Show Structure",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "docs:show-structure"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🧱 Components: Create",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "component:create", "${input:componentName}"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Components}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": true,
+          "panel": "new",
+          "showReuseMessage": false,
+          "clear": true
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🗑️ Components: Delete",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "component:delete", "${input:componentNameToDelete}"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Components}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": true,
+          "panel": "new",
+          "showReuseMessage": false,
+          "clear": true
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔄 Components: Generate Exports",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "exports:generate"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Components}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔍 Components: Check Duplicates",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev:dupecheck"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Components}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔢 Version: Patch Increment",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "version:patch:increment"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      }
+    ],
+    "inputs": [
+      {
+        "id": "customVersion",
+        "description": "Enter the version (e.g., 1.2.3, 2.0.0-beta.1, 1.0.0+build.123)",
+        "default": "",
+        "type": "promptString"
+      },
+      {
+        "id": "componentName",
+        "description": "Enter component name (PascalCase, e.g., Button, MyCard, DatePicker)",
+        "default": "",
+        "type": "promptString"
+      },
+      {
+        "id": "componentNameToDelete",
+        "description": "Enter component name or directory to delete (e.g., Button, button, MyCard, mycard)",
+        "default": "",
+        "type": "promptString"
+      }
+    ]
+  }
+}
