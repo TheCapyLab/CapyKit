@@ -1,15 +1,15 @@
 {
   "name": "capykit",
   "version": "0.1.0",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "TheCapyLab",
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@thecapylab/core": "^0.1.0"
+    "@thecapylab/capykitcore": "^0.1.0",
+    "@thecapylab/capykitcomposables": "^0.1.0"
   },
-  "exports" : {
-    "./button" : "./button/Button.vue"
+  "exports": {
+    "./button": "./button/Button.vue"
   }
 }

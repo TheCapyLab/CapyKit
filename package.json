@@ -16,18 +16,17 @@
   "bugs": {
     "url": "https://github.com/TheCapyLab/CapyKit/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/TheCapyLab/CapyKit#readme",
   "scripts": {
-    "build": "npm run component:exports:generate",
-    "dev:pack": "npm pack",
-    "dev:link": "npm link @thecapylab/capykit",
+    "dev:clean": "node scripts/clean.js",
+    "dev:packs": "node scripts/create-packs.js",
+
     "version:patch:increment": "node scripts/increment-version.js patch",
     "version:minor:increment": "node scripts/increment-version.js minor",
     "version:major:increment": "node scripts/increment-version.js major",
-    "component:exports:generate": "node scripts/generate-exports.js",
-    "component:exports:list": "node scripts/list-components.js",
-    "component:add": "node scripts/add-component.js",
-    "component:remove": "node scripts/remove-component.js",
+    "version:set": "node scripts/set-version.js",
+    
     "docs:dev": "npm run docs:update-all && vitepress dev docs",
     "docs:build": "npm run docs:update-all && vitepress build docs",
     "docs:preview": "npm run docs:update-all && vitepress preview docs",
