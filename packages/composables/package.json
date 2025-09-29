@@ -3,5 +3,8 @@
   "version": "0.1.0",
   "description": "Composables used by the capykit UI Library",
   "author": "TheCapyLab",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "composable:add": "node ./scripts/add-composable.js"
+  }
 }
