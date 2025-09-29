@@ -30,9 +30,9 @@
     "docs:dev": "npm run docs:update-all && vitepress dev docs",
     "docs:build": "npm run docs:update-all && vitepress build docs",
     "docs:preview": "npm run docs:update-all && vitepress preview docs",
-    "docs:update-all": "node docs/build-scripts/update-versions.cjs && node docs/build-scripts/generate-sidebar.cjs && node docs/build-scripts/show-structure.cjs",
-    "docs:update-versions": "node docs/build-scripts/update-versions.cjs",
-    "docs:update-sidebar": "node docs/build-scripts/generate-sidebar.cjs",
-    "docs:show-structure": "node docs/build-scripts/show-structure.cjs"
+    "docs:update-all": "node docs/scripts/update-versions.cjs && node docs/scripts/generate-sidebar.cjs && node docs/scripts/show-structure.cjs",
+    "docs:update-versions": "node docs/scripts/update-versions.cjs",
+    "docs:update-sidebar": "node docs/scripts/generate-sidebar.cjs",
+    "docs:show-structure": "node docs/scripts/show-structure.cjs"
   }
 }
