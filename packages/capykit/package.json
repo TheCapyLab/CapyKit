@@ -1,15 +1,33 @@
 {
   "name": "capykit",
   "version": "0.1.0",
-  "scripts": {},
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    },
+    "./button": {
+      "types": "./button/index.d.ts",
+      "import": "./button/index.js",
+      "default": "./button/index.js"
+    }
+  },
+  "scripts": {
+    "dev:dupecheck": "node ./scripts/check-duplicate-paths.js",
+    "component:create": "node ./scripts/create-component.js",
+    "component:delete": "node ./scripts/delete-component.js",
+    "exports:generate": "node ./scripts/generate-exports.js"
+  },
   "author": "TheCapyLab",
   "license": "MIT",
   "description": "",
   "dependencies": {
     "@thecapylab/capykitcore": "^0.1.0",
     "@thecapylab/capykitcomposables": "^0.1.0"
-  },
-  "exports": {
-    "./button": "./button/Button.vue"
   }
 }

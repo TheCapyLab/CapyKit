@@ -1,12 +1,8 @@
 ﻿<template>
-  <button class="ck-button">
-    <!-- TODO: implement Button -->
-  </button>
+  <button class="ck-button">I am a button</button>
 </template>
 
-<script setup lang="ts">
-defineProps({});
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .ck-button {
