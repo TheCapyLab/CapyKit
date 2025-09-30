@@ -16,6 +16,17 @@ export function createSharedConfig(config: PackageConfig): UserConfig {
   return defineConfig({
     plugins: [vue()],
     build: {
+      minify: "terser",
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+        mangle: true,
+        format: {
+          comments: false,
+        },
+      },
       lib: {
         entry: resolve(entry),
         name: packageName,
