@@ -1,6 +1,22 @@
 {
   "name": "@thecapylab/capykitcore",
   "version": "0.1.0",
+  "type": "module",
+  "main": "./index.cjs.js",
+  "module": "./index.esm.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.esm.js",
+      "require": "./index.cjs.js",
+      "default": "./index.esm.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "exports:generate": "node ./scripts/generate-exports.js"
+  },
   "author": "TheCapyLab",
   "license": "MIT",
   "dependencies": {

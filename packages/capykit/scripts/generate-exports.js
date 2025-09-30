@@ -6,16 +6,17 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
+const srcRoot = path.join(packageRoot, "src");
 const packageJsonPath = path.join(packageRoot, "package.json");
-const indexJsPath = path.join(packageRoot, "index.js");
-const indexDtsPath = path.join(packageRoot, "index.d.ts");
+const indexJsPath = path.join(srcRoot, "index.js");
+const indexDtsPath = path.join(srcRoot, "index.d.ts");
 
 console.log("🔄 Generating exports...");
 
 // Find all component directories
 function findComponentDirs() {
   const components = [];
-  const items = fs.readdirSync(packageRoot, { withFileTypes: true });
+  const items = fs.readdirSync(srcRoot, { withFileTypes: true });
 
   for (const item of items) {
     // Skip non-directories and excluded folders
@@ -29,7 +30,7 @@ function findComponentDirs() {
       continue;
     }
 
-    const componentPath = path.join(packageRoot, item.name);
+    const componentPath = path.join(srcRoot, item.name);
     const indexJsExists = fs.existsSync(path.join(componentPath, "index.js"));
     const indexDtsExists = fs.existsSync(
       path.join(componentPath, "index.d.ts")

@@ -1,10 +1,23 @@
 {
   "name": "@thecapylab/capykitcomposables",
   "version": "0.1.0",
+  "type": "module",
+  "main": "./index.cjs.js",
+  "module": "./index.esm.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.esm.js",
+      "require": "./index.cjs.js",
+      "default": "./index.esm.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "composable:add": "node ./scripts/add-composable.js"
+  },
   "description": "Composables used by the capykit UI Library",
   "author": "TheCapyLab",
-  "license": "MIT",
-  "scripts": {
-    "composable:add": "node ./scripts/add-composable.js"
-  }
+  "license": "MIT"
 }

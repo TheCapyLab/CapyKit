@@ -20,7 +20,18 @@
   "homepage": "https://github.com/TheCapyLab/CapyKit#readme",
   "scripts": {
     "dev:clean": "node scripts/clean.js",
-    "dev:packs": "node scripts/create-packs.js",
+    "build:all": "node scripts/build.js",
+    "build:capykit": "node scripts/build.js capykit",
+    "build:core": "node scripts/build.js core",
+    "build:composables": "node scripts/build.js composables",
+    "pack:all": "node scripts/pack.js --collect",
+    "pack:capykit": "node scripts/pack.js capykit",
+    "pack:core": "node scripts/pack.js core",
+    "pack:composables": "node scripts/pack.js composables",
+    "create:package": "node scripts/create-package.js",
+    "delete:package": "node scripts/delete-package.js",
+    "package:create": "node scripts/create-package.js",
+    "package:delete": "node scripts/delete-package.js",
     "version:patch:increment": "node scripts/increment-version.js patch",
     "version:minor:increment": "node scripts/increment-version.js minor",
     "version:major:increment": "node scripts/increment-version.js major",
@@ -32,5 +43,12 @@
     "docs:update-versions": "node docs/scripts/update-versions.cjs",
     "docs:update-sidebar": "node docs/scripts/generate-sidebar.cjs",
     "docs:show-structure": "node docs/scripts/show-structure.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "glob": "^11.0.3",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.6"
   }
 }

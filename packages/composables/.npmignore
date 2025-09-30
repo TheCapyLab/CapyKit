@@ -1,1 +1,24 @@
-scripts/
+# Source files
+/src
+/scripts
+/tests
+/test
+
+# Build tools
+vite.config.ts
+tsconfig.json
+
+# Development
+*.log
+.DS_Store
+node_modules/
+.env*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db

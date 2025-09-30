@@ -1,12 +1,30 @@
+// VS Code Workspace Configuration
 {
-  // create a terminal, one for each folder
   "folders": [
-    { "name": "Root", "path": "." },
-    { "name": "Core", "path": "./packages/core" },
-    { "name": "Composables", "path": "./packages/composables" },
-    { "name": "Components", "path": "./packages/capykit" },
-    { "name": "Actions", "path": "./.github/workflows" },
-    { "name": "Docs", "path": "./docs" }
+    {
+      "name": "Root",
+      "path": "."
+    },
+    {
+      "name": "Core",
+      "path": "./packages/core"
+    },
+    {
+      "name": "Composables",
+      "path": "./packages/composables"
+    },
+    {
+      "name": "Components",
+      "path": "./packages/capykit"
+    },
+    {
+      "name": "Actions",
+      "path": "./.github/workflows"
+    },
+    {
+      "name": "Docs",
+      "path": "./docs"
+    }
   ],
   "extensions": {
     "recommendations": [
@@ -36,7 +54,10 @@
         "label": "🧹 Clean Project",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "dev:clean"],
+        "args": [
+          "run",
+          "dev:clean"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -55,7 +76,10 @@
         "label": "📦 Create Packs",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "dev:packs"],
+        "args": [
+          "run",
+          "dev:packs"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -74,7 +98,10 @@
         "label": "🔢 Version: Patch Increment",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "version:patch:increment"],
+        "args": [
+          "run",
+          "version:patch:increment"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -93,7 +120,10 @@
         "label": "🔢 Version: Minor Increment",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "version:minor:increment"],
+        "args": [
+          "run",
+          "version:minor:increment"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -112,7 +142,10 @@
         "label": "🔢 Version: Major Increment",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "version:major:increment"],
+        "args": [
+          "run",
+          "version:major:increment"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -131,7 +164,11 @@
         "label": "🎯 Version: Set Custom",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "version:set", "${input:customVersion}"],
+        "args": [
+          "run",
+          "version:set",
+          "${input:customVersion}"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -150,7 +187,10 @@
         "label": "📚 Docs: Start Dev Server",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:dev"],
+        "args": [
+          "run",
+          "docs:dev"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -170,7 +210,10 @@
         "label": "📚 Docs: Build",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:build"],
+        "args": [
+          "run",
+          "docs:build"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -189,7 +232,10 @@
         "label": "📚 Docs: Preview",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:preview"],
+        "args": [
+          "run",
+          "docs:preview"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -209,7 +255,10 @@
         "label": "📚 Docs: Update All",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:update-all"],
+        "args": [
+          "run",
+          "docs:update-all"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -228,7 +277,10 @@
         "label": "📚 Docs: Update Versions",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:update-versions"],
+        "args": [
+          "run",
+          "docs:update-versions"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -247,7 +299,10 @@
         "label": "📚 Docs: Update Sidebar",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:update-sidebar"],
+        "args": [
+          "run",
+          "docs:update-sidebar"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -266,7 +321,10 @@
         "label": "📚 Docs: Show Structure",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "docs:show-structure"],
+        "args": [
+          "run",
+          "docs:show-structure"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -285,7 +343,11 @@
         "label": "🧱 Components: Create",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "component:create", "${input:componentName}"],
+        "args": [
+          "run",
+          "component:create",
+          "${input:componentName}"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Components}"
@@ -304,7 +366,11 @@
         "label": "🗑️ Components: Delete",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "component:delete", "${input:componentNameToDelete}"],
+        "args": [
+          "run",
+          "component:delete",
+          "${input:componentNameToDelete}"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Components}"
@@ -323,7 +389,10 @@
         "label": "🔄 Components: Generate Exports",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "exports:generate"],
+        "args": [
+          "run",
+          "exports:generate"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Components}"
@@ -342,7 +411,10 @@
         "label": "🔍 Components: Check Duplicates",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "dev:dupecheck"],
+        "args": [
+          "run",
+          "dev:dupecheck"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Components}"
@@ -361,7 +433,10 @@
         "label": "🔢 Version: Patch Increment",
         "type": "shell",
         "command": "npm",
-        "args": ["run", "version:patch:increment"],
+        "args": [
+          "run",
+          "version:patch:increment"
+        ],
         "group": "build",
         "options": {
           "cwd": "${workspaceFolder:Root}"
@@ -375,9 +450,67 @@
           "clear": false
         },
         "problemMatcher": []
+      },
+      {
+        "label": "🆕 Create Package",
+        "type": "shell",
+        "command": "npm",
+        "args": [
+          "run",
+          "create:package",
+          "${input:packageName}"
+        ],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🗑️ Delete Package",
+        "type": "shell",
+        "command": "npm",
+        "args": [
+          "run",
+          "delete:package",
+          "${input:packageNameToDelete}"
+        ],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:Root}"
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
       }
     ],
     "inputs": [
+      {
+        "id": "packageName",
+        "description": "Enter package name (lowercase with hyphens, e.g., my-package, ui-components)",
+        "default": "",
+        "type": "promptString"
+      },
+      {
+        "id": "packageNameToDelete",
+        "description": "Enter package name to delete (e.g., my-package, ui-components)",
+        "default": "",
+        "type": "promptString"
+      },
       {
         "id": "customVersion",
         "description": "Enter the version (e.g., 1.2.3, 2.0.0-beta.1, 1.0.0+build.123)",

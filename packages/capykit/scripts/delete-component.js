@@ -7,6 +7,7 @@ import readline from "readline";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
+const srcRoot = path.join(packageRoot, "src");
 
 // Get component name from command line argument
 const componentInput = process.argv[2];
@@ -44,13 +45,13 @@ function findComponentDir(input) {
   const lowercaseInput = input.toLowerCase();
 
   // First try direct directory name match
-  let componentDir = path.join(packageRoot, lowercaseInput);
+  let componentDir = path.join(srcRoot, lowercaseInput);
   if (fs.existsSync(componentDir)) {
     return { dirName: lowercaseInput, path: componentDir };
   }
 
   // Try finding by component name (look for Vue files matching the input)
-  const items = fs.readdirSync(packageRoot, { withFileTypes: true });
+  const items = fs.readdirSync(srcRoot, { withFileTypes: true });
 
   for (const item of items) {
     if (
@@ -60,7 +61,7 @@ function findComponentDir(input) {
       ) &&
       !item.name.startsWith(".")
     ) {
-      const dirPath = path.join(packageRoot, item.name);
+      const dirPath = path.join(srcRoot, item.name);
       const vueFiles = fs
         .readdirSync(dirPath)
         .filter((file) => file.endsWith(".vue"));
@@ -109,7 +110,7 @@ async function main() {
       console.log("\n📁 Available components:");
 
       // List available components
-      const items = fs.readdirSync(packageRoot, { withFileTypes: true });
+      const items = fs.readdirSync(srcRoot, { withFileTypes: true });
       const availableComponents = [];
 
       for (const item of items) {
@@ -125,7 +126,7 @@ async function main() {
           ].includes(item.name) &&
           !item.name.startsWith(".")
         ) {
-          const dirPath = path.join(packageRoot, item.name);
+          const dirPath = path.join(srcRoot, item.name);
           const vueFiles = fs
             .readdirSync(dirPath)
             .filter((file) => file.endsWith(".vue"));

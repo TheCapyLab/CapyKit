@@ -18,6 +18,7 @@
     }
   },
   "scripts": {
+    "build": "vite build",
     "dev:dupecheck": "node ./scripts/check-duplicate-paths.js",
     "component:create": "node ./scripts/create-component.js",
     "component:delete": "node ./scripts/delete-component.js",

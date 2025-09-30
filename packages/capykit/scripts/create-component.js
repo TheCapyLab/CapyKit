@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
+const srcRoot = path.join(packageRoot, "src");
 
 // Get component name from command line argument
 const componentName = process.argv[2];
@@ -26,7 +27,7 @@ if (!/^[A-Z][a-zA-Z0-9]*$/.test(componentName)) {
 }
 
 const componentDirName = componentName.toLowerCase();
-const componentDir = path.join(packageRoot, componentDirName);
+const componentDir = path.join(srcRoot, componentDirName);
 
 // Check if component already exists
 if (fs.existsSync(componentDir)) {

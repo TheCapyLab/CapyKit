@@ -1,0 +1,127 @@
+name: Build and Publish Packages
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - "packages/**"
+      - "vite.config.shared.ts"
+      - "scripts/build.js"
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      package:
+        description: "Package to publish (leave empty for all)"
+        required: false
+        type: choice
+        options:
+          - "capykit"
+          - "core"
+          - "composables"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build all packages
+        run: npm run build:all
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-packages
+          path: |
+            packages/*/dist/
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+
+    strategy:
+      matrix:
+        package: [capykit, core, composables]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-packages
+          path: packages/
+
+      - name: Check if package should be published
+        id: should-publish
+        run: |
+          PACKAGE_INPUT="${{ github.event.inputs.package }}"
+          CURRENT_PACKAGE="${{ matrix.package }}"
+
+          if [[ -z "$PACKAGE_INPUT" || "$PACKAGE_INPUT" == "$CURRENT_PACKAGE" ]]; then
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish package
+        if: steps.should-publish.outputs.should_publish == 'true'
+        run: |
+          cd packages/${{ matrix.package }}/dist
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  pack:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-packages
+          path: packages/
+
+      - name: Pack all packages
+        run: npm run pack:all
+
+      - name: Upload packed artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: packed-packages
+          path: artifacts/*.tgz
+          retention-days: 30
