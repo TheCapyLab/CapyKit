@@ -1,5 +1,6 @@
 import { defineConfig, type UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import dts from "vite-plugin-dts";
 import { resolve } from "node:path";
 import fs from "node:fs";
 import { glob } from "glob";
@@ -14,7 +15,16 @@ export function createSharedConfig(config: PackageConfig): UserConfig {
   const { packageName, entry, outputDir } = config;
 
   return defineConfig({
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      dts({
+        outputDir: outputDir,
+        insertTypesEntry: true,
+        include: ["src/**/*"],
+        exclude: ["**/*.test.*", "**/*.spec.*"],
+        entryRoot: "src",
+      }),
+    ],
     build: {
       minify: "terser",
       terserOptions: {
@@ -33,7 +43,7 @@ export function createSharedConfig(config: PackageConfig): UserConfig {
         formats: ["es", "cjs"],
       },
       rollupOptions: {
-        external: ["vue"],
+        external: ["vue", "@vue/runtime-core"],
         output: [
           {
             format: "es",

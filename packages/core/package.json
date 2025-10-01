@@ -19,10 +19,9 @@
   },
   "author": "TheCapyLab",
   "license": "MIT",
-  "dependencies": {
-    "vue": "^3.5.22"
-  },
   "devDependencies": {
-    "@types/vue": "^1.0.31"
+    "@types/node": "^24.6.1",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.22"
   }
 }

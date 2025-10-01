@@ -20,6 +20,7 @@
   "homepage": "https://github.com/TheCapyLab/CapyKit#readme",
   "scripts": {
     "dev:clean": "node scripts/clean.js",
+    "dev:install:all": "node scripts/install-all.js",
     "build:all": "node scripts/build.js",
     "build:capykit": "node scripts/build.js capykit",
     "build:core": "node scripts/build.js core",
@@ -45,11 +46,13 @@
     "docs:show-structure": "node docs/scripts/show-structure.cjs"
   },
   "devDependencies": {
-    "@types/node": "^24.6.0",
+    "@types/node": "^24.6.1",
     "@vitejs/plugin-vue": "^5.2.4",
     "glob": "^11.0.3",
     "terser": "^5.44.0",
     "typescript": "^5.9.2",
-    "vite": "^6.3.6"
+    "vite": "^6.3.6",
+    "vite-plugin-dts": "^4.5.4",
+    "vue": "^3.5.22"
   }
 }
