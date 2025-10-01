@@ -181,36 +181,29 @@ async function main() {
     fs.rmSync(componentPath, { recursive: true, force: true });
     console.log(`✅ Deleted: ./${dirName}/`);
 
-    // Ask if user wants to regenerate exports
-    const regenerateExports = await askConfirmation(
-      `\nRegenerate exports automatically? (Y/n): `
-    );
-
     rl.close();
 
-    if (regenerateExports) {
-      console.log(`\n🔄 Regenerating exports...`);
+    // Automatically regenerate exports
+    console.log(`\n🔄 Regenerating exports...`);
 
-      // Import and run the generate-exports script
-      const { exec } = await import("child_process");
-      const { promisify } = await import("util");
-      const execAsync = promisify(exec);
+    // Import and run the generate-exports script
+    const { exec } = await import("child_process");
+    const { promisify } = await import("util");
+    const execAsync = promisify(exec);
 
-      try {
-        const { stdout, stderr } = await execAsync(
-          "node scripts/generate-exports.js",
-          {
-            cwd: packageRoot,
-          }
-        );
-        console.log(stdout);
-        if (stderr) console.error(stderr);
-      } catch (error) {
-        console.error("❌ Error regenerating exports:", error.message);
-        console.log("💡 Please run manually: node scripts/generate-exports.js");
-      }
-    } else {
-      console.log(`\n💡 Don't forget to run: node scripts/generate-exports.js`);
+    try {
+      const { stdout, stderr } = await execAsync(
+        "node scripts/generate-exports.js",
+        {
+          cwd: packageRoot,
+        }
+      );
+      console.log(stdout);
+      if (stderr) console.error(stderr);
+      console.log(`✅ Exports regenerated successfully!`);
+    } catch (error) {
+      console.error("❌ Error regenerating exports:", error.message);
+      console.log("💡 Please run manually: node scripts/generate-exports.js");
     }
 
     console.log(

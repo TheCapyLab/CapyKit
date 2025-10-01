@@ -12,7 +12,8 @@ const rootDir = resolve(__dirname, "..");
 const packages = [
   { name: "capykit", path: "packages/capykit" },
   { name: "core", path: "packages/core" },
-  { name: "composables", path: "packages/composables" }];
+  { name: "composables", path: "packages/composables" },
+];
 
 function packPackage(packageInfo) {
   const { name, path } = packageInfo;
@@ -110,7 +111,8 @@ function main() {
     }
   }
 
-  if (collectFlag && tarballPaths.length > 0) {
+  // Always collect artifacts and clean up dist directories
+  if (tarballPaths.length > 0) {
     collectArtifacts(tarballPaths);
   }
 

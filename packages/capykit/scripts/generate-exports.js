@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
 const srcRoot = path.join(packageRoot, "src");
 const packageJsonPath = path.join(packageRoot, "package.json");
-const indexJsPath = path.join(srcRoot, "index.js");
+const indexTsPath = path.join(srcRoot, "index.ts");
 const indexDtsPath = path.join(srcRoot, "index.d.ts");
 
 console.log("🔄 Generating exports...");
@@ -103,21 +103,21 @@ function updatePackageJsonExports(components) {
   }
 }
 
-// Update main index.js
-function updateIndexJs(components) {
+// Update main index.ts
+function updateIndexTs(components) {
   let content = "";
 
   for (const component of components) {
-    content += `export * from "./${component.dirName}/index.js";\n`;
+    content += `export { default as ${component.componentName} } from "./${component.dirName}";\n`;
   }
 
   try {
-    fs.writeFileSync(indexJsPath, content);
+    fs.writeFileSync(indexTsPath, content);
     console.log(
-      `✅ Updated index.js with ${components.length} component exports`
+      `✅ Updated index.ts with ${components.length} component exports`
     );
   } catch (error) {
-    console.error("❌ Error writing index.js:", error.message);
+    console.error("❌ Error writing index.ts:", error.message);
     process.exit(1);
   }
 }
@@ -127,7 +127,7 @@ function updateIndexDts(components) {
   let content = "";
 
   for (const component of components) {
-    content += `export { default as ${component.componentName} } from "./${component.dirName}/index.js";\n`;
+    content += `export { default as ${component.componentName} } from "./${component.dirName}";\n`;
   }
 
   try {
@@ -159,7 +159,7 @@ try {
   });
 
   updatePackageJsonExports(components);
-  updateIndexJs(components);
+  updateIndexTs(components);
   updateIndexDts(components);
 
   console.log("\n🎉 Exports generated successfully!");
@@ -167,7 +167,7 @@ try {
   console.log(
     `   - Updated package.json with ${components.length} export paths`
   );
-  console.log(`   - Updated index.js with re-exports`);
+  console.log(`   - Updated index.ts with re-exports`);
   console.log(`   - Updated index.d.ts with type exports`);
   console.log("\n💡 Available imports:");
   console.log(

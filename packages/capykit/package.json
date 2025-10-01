@@ -15,6 +15,11 @@
       "types": "./button/index.d.ts",
       "import": "./button/index.js",
       "default": "./button/index.js"
+    },
+    "./progressbar": {
+      "types": "./progressbar/index.d.ts",
+      "import": "./progressbar/index.js",
+      "default": "./progressbar/index.js"
     }
   },
   "scripts": {

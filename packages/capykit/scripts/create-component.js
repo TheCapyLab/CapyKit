@@ -3,6 +3,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { execSync } from "child_process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
@@ -109,13 +110,27 @@ try {
 
   console.log(`\nComponent "${componentName}" created successfully!`);
   console.log(`Location: ./${componentDirName}/`);
+
+  // Automatically regenerate exports
+  console.log(`\n🔄 Regenerating exports...`);
+  try {
+    const output = execSync("node scripts/generate-exports.js", {
+      cwd: packageRoot,
+      encoding: "utf-8",
+    });
+    console.log(output);
+    console.log(`✅ Exports regenerated successfully!`);
+  } catch (error) {
+    console.error("❌ Error regenerating exports:", error.message);
+    console.log("💡 Please run manually: node scripts/generate-exports.js");
+  }
+
   console.log(`\nNext steps:`);
-  console.log(`1. Run: node scripts/generate-exports.js`);
   console.log(
-    `2. Add your component logic to ${componentDirName}/${componentName}.vue`
+    `1. Add your component logic to ${componentDirName}/${componentName}.vue`
   );
   console.log(
-    `3. Update the TypeScript interfaces in ${componentDirName}/index.d.ts`
+    `2. Update the TypeScript interfaces in ${componentDirName}/index.d.ts`
   );
 } catch (error) {
   console.error(`Error creating component files:`, error.message);
