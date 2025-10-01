@@ -18,7 +18,7 @@ export function createSharedConfig(config: PackageConfig): UserConfig {
     plugins: [
       vue(),
       dts({
-        outputDir: outputDir,
+        outDir: outputDir,
         insertTypesEntry: true,
         include: ["src/**/*"],
         exclude: ["**/*.test.*", "**/*.spec.*"],

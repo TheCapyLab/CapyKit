@@ -1,5 +1,5 @@
 // Export type definitions
-export * from "./index.d";
+export * from "./types";
 
 // Export plugin as the default export and named export
 export { default as CapyKit } from "./plugin";
