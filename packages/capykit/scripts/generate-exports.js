@@ -11,7 +11,7 @@ const packageJsonPath = path.join(packageRoot, "package.json");
 const indexTsPath = path.join(srcRoot, "index.ts");
 const indexDtsPath = path.join(srcRoot, "index.d.ts");
 
-console.log("🔄 Generating exports...");
+console.log("Generating exports...");
 
 // Find all component directories
 function findComponentDirs() {
@@ -65,7 +65,7 @@ function updatePackageJsonExports(components) {
   try {
     packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
   } catch (error) {
-    console.error("❌ Error reading package.json:", error.message);
+    console.error("Error reading package.json:", error.message);
     process.exit(1);
   }
 
@@ -95,10 +95,10 @@ function updatePackageJsonExports(components) {
       JSON.stringify(packageJson, null, 2) + "\n"
     );
     console.log(
-      `✅ Updated package.json exports for ${components.length} components`
+      `Updated package.json exports for ${components.length} components`
     );
   } catch (error) {
-    console.error("❌ Error writing package.json:", error.message);
+    console.error("Error writing package.json:", error.message);
     process.exit(1);
   }
 }
@@ -113,11 +113,9 @@ function updateIndexTs(components) {
 
   try {
     fs.writeFileSync(indexTsPath, content);
-    console.log(
-      `✅ Updated index.ts with ${components.length} component exports`
-    );
+    console.log(`Updated index.ts with ${components.length} component exports`);
   } catch (error) {
-    console.error("❌ Error writing index.ts:", error.message);
+    console.error("Error writing index.ts:", error.message);
     process.exit(1);
   }
 }
@@ -133,10 +131,10 @@ function updateIndexDts(components) {
   try {
     fs.writeFileSync(indexDtsPath, content);
     console.log(
-      `✅ Updated index.d.ts with ${components.length} component exports`
+      `Updated index.d.ts with ${components.length} component exports`
     );
   } catch (error) {
-    console.error("❌ Error writing index.d.ts:", error.message);
+    console.error("Error writing index.d.ts:", error.message);
     process.exit(1);
   }
 }
@@ -146,14 +144,14 @@ try {
   const components = findComponentDirs();
 
   if (components.length === 0) {
-    console.log("⚠️  No components found to export");
+    console.log("No components found to export");
     console.log(
       "Components must have: index.js, index.d.ts, and at least one .vue file"
     );
     process.exit(0);
   }
 
-  console.log(`📦 Found ${components.length} components:`);
+  console.log(`Found ${components.length} components:`);
   components.forEach((comp) => {
     console.log(`   - ${comp.componentName} (./${comp.dirName}/)`);
   });
@@ -162,14 +160,14 @@ try {
   updateIndexTs(components);
   updateIndexDts(components);
 
-  console.log("\n🎉 Exports generated successfully!");
-  console.log("\n📝 Summary:");
+  console.log("\nExports generated successfully!");
+  console.log("\nSummary:");
   console.log(
     `   - Updated package.json with ${components.length} export paths`
   );
   console.log(`   - Updated index.ts with re-exports`);
   console.log(`   - Updated index.d.ts with type exports`);
-  console.log("\n💡 Available imports:");
+  console.log("\nAvailable imports:");
   console.log(
     `   import { ${components
       .map((c) => c.componentName)
@@ -181,6 +179,6 @@ try {
     );
   });
 } catch (error) {
-  console.error("❌ Error generating exports:", error.message);
+  console.error("Error generating exports:", error.message);
   process.exit(1);
 }

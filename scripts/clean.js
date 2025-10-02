@@ -65,7 +65,7 @@ const actions = {
 };
 
 function runCleanup() {
-  console.log("🧹 Starting cleanup process...\n");
+  console.log("Starting cleanup process...\n");
 
   let totalTasks = 0;
   let completedTasks = 0;

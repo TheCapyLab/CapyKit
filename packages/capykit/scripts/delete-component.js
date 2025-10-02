@@ -13,7 +13,7 @@ const srcRoot = path.join(packageRoot, "src");
 const componentInput = process.argv[2];
 
 if (!componentInput) {
-  console.error("❌ Error: Component name or directory is required");
+  console.error("Error: Component name or directory is required");
   console.log(
     "Usage: node scripts/delete-component.js <ComponentName|directory-name>"
   );
@@ -101,13 +101,13 @@ function getComponentInfo(componentPath) {
 // Main execution
 async function main() {
   try {
-    console.log(`🔍 Looking for component: ${componentInput}`);
+    console.log(`Looking for component: ${componentInput}`);
 
     const componentResult = findComponentDir(componentInput);
 
     if (!componentResult) {
-      console.error(`❌ Error: Component "${componentInput}" not found`);
-      console.log("\n📁 Available components:");
+      console.error(`Error: Component "${componentInput}" not found`);
+      console.log("\nAvailable components:");
 
       // List available components
       const items = fs.readdirSync(srcRoot, { withFileTypes: true });
@@ -155,8 +155,8 @@ async function main() {
     } = componentResult;
     const componentInfo = getComponentInfo(componentPath);
 
-    console.log(`\n📦 Found component: ${componentInfo.componentName}`);
-    console.log(`📁 Directory: ./${dirName}/`);
+    console.log(`\nFound component: ${componentInfo.componentName}`);
+    console.log(`Directory: ./${dirName}/`);
     console.log(`📄 Files to delete:`);
     componentInfo.allFiles.forEach((file) => {
       console.log(`   - ${dirName}/${file}`);
@@ -164,27 +164,27 @@ async function main() {
 
     // Ask for confirmation
     console.log(
-      `\n⚠️  This will permanently delete the component and all its files!`
+      `\nThis will permanently delete the component and all its files!`
     );
     const confirmed = await askConfirmation(
       `Are you sure you want to delete "${componentInfo.componentName}"? (y/N): `
     );
 
     if (!confirmed) {
-      console.log("❌ Deletion cancelled");
+      console.log("Deletion cancelled");
       rl.close();
       process.exit(0);
     }
 
     // Delete the component directory
-    console.log(`\n🗑️  Deleting component...`);
+    console.log(`\nDeleting component...`);
     fs.rmSync(componentPath, { recursive: true, force: true });
-    console.log(`✅ Deleted: ./${dirName}/`);
+    console.log(`Deleted: ./${dirName}/`);
 
     rl.close();
 
     // Automatically regenerate exports
-    console.log(`\n🔄 Regenerating exports...`);
+    console.log(`\nRegenerating exports...`);
 
     // Import and run the generate-exports script
     const { exec } = await import("child_process");
@@ -200,17 +200,17 @@ async function main() {
       );
       console.log(stdout);
       if (stderr) console.error(stderr);
-      console.log(`✅ Exports regenerated successfully!`);
+      console.log(`Exports regenerated successfully!`);
     } catch (error) {
-      console.error("❌ Error regenerating exports:", error.message);
-      console.log("💡 Please run manually: node scripts/generate-exports.js");
+      console.error("Error regenerating exports:", error.message);
+      console.log("Please run manually: node scripts/generate-exports.js");
     }
 
     console.log(
-      `\n🎉 Component "${componentInfo.componentName}" deleted successfully!`
+      `\nComponent "${componentInfo.componentName}" deleted successfully!`
     );
   } catch (error) {
-    console.error("❌ Error deleting component:", error.message);
+    console.error("Error deleting component:", error.message);
     rl.close();
     process.exit(1);
   }

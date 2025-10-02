@@ -21,11 +21,11 @@ function packPackage(packageInfo) {
   const distDir = resolve(packageDir, "dist");
 
   if (!fs.existsSync(distDir)) {
-    console.error(`❌ No dist directory found for ${name}. Run build first.`);
+    console.error(`No dist directory found for ${name}. Run build first.`);
     return null;
   }
 
-  console.log(`📦 Packing ${name}...`);
+  console.log(`Packing ${name}...`);
 
   try {
     // Run npm pack in the dist directory
@@ -37,10 +37,10 @@ function packPackage(packageInfo) {
     const tarballName = output.split("\\n").pop();
     const tarballPath = resolve(distDir, tarballName);
 
-    console.log(`✅ Packed ${name}: ${tarballName}`);
+    console.log(`Packed ${name}: ${tarballName}`);
     return tarballPath;
   } catch (error) {
-    console.error(`❌ Failed to pack ${name}:`, error.message);
+    console.error(`Failed to pack ${name}:`, error.message);
     return null;
   }
 }
@@ -53,7 +53,7 @@ function collectArtifacts(tarballPaths) {
     fs.mkdirSync(artifactsDir);
   }
 
-  console.log(`\n📂 Collecting artifacts in ${artifactsDir}...`);
+  console.log(`\nCollecting artifacts in ${artifactsDir}...`);
 
   for (const tarballPath of tarballPaths) {
     if (tarballPath) {
@@ -68,12 +68,12 @@ function collectArtifacts(tarballPaths) {
         fs.unlinkSync(tarballPath);
         console.log(`🗑️  Removed ${fileName} from package dist`);
       } catch (error) {
-        console.warn(`⚠️  Could not remove ${tarballPath}: ${error.message}`);
+        console.warn(`Could not remove ${tarballPath}: ${error.message}`);
       }
     }
   }
 
-  console.log(`\n✨ Artifacts collected and package dist directories cleaned`);
+  console.log(`\nArtifacts collected and package dist directories cleaned`);
 }
 
 function main() {
@@ -88,7 +88,7 @@ function main() {
     const packageInfo = packages.find((pkg) => pkg.name === targetPackage);
     if (!packageInfo) {
       console.error(
-        `❌ Package "${targetPackage}" not found. Available packages: ${packages
+        `Package "${targetPackage}" not found. Available packages: ${packages
           .map((p) => p.name)
           .join(", ")}`
       );
@@ -101,7 +101,7 @@ function main() {
     }
   } else {
     // Pack all packages
-    console.log("📦 Packing all packages...");
+    console.log("Packing all packages...");
 
     for (const packageInfo of packages) {
       const tarballPath = packPackage(packageInfo);
@@ -121,9 +121,9 @@ function main() {
     targetPackage && targetPackage !== "--collect" ? 1 : packages.length;
 
   if (successCount === totalCount) {
-    console.log(`\\n🎉 Successfully packed ${successCount} package(s)!`);
+    console.log(`\\nSuccessfully packed ${successCount} package(s)!`);
   } else {
-    console.log(`\\n⚠️  Packed ${successCount}/${totalCount} packages`);
+    console.log(`\\nPacked ${successCount}/${totalCount} packages`);
     process.exit(1);
   }
 }

@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = resolve(__dirname, "..");
 
-console.log("📦 Installing dependencies in all packages...");
+console.log("Installing dependencies in all packages...");
 
 // Get all package directories
 const packagesDir = resolve(rootDir, "packages");
@@ -22,15 +22,15 @@ const packageDirs = fs.readdirSync(packagesDir).filter((dir) => {
 });
 
 // Install in root first
-console.log("🏠 Installing root dependencies...");
+console.log("Installing root dependencies...");
 try {
   execSync("npm install", {
     cwd: rootDir,
     stdio: "inherit",
   });
-  console.log("✅ Root dependencies installed");
+  console.log("Root dependencies installed");
 } catch (error) {
-  console.error("❌ Failed to install root dependencies:", error.message);
+  console.error("Failed to install root dependencies:", error.message);
   process.exit(1);
 }
 
@@ -39,7 +39,7 @@ for (const packageDir of packageDirs) {
   const packagePath = resolve(packagesDir, packageDir);
   const packageJsonPath = resolve(packagePath, "package.json");
 
-  console.log(`📦 Installing dependencies in ${packageDir}...`);
+  console.log(`Installing dependencies in ${packageDir}...`);
 
   try {
     // Read package.json to check if it has external dependencies
@@ -103,15 +103,15 @@ for (const packageDir of packageDirs) {
         `⏭️  Only workspace dependencies in ${packageDir}, skipping npm install`
       );
     } else {
-      console.log(`✅ External dependencies installed in ${packageDir}`);
+      console.log(`External dependencies installed in ${packageDir}`);
     }
   } catch (error) {
     console.error(
-      `❌ Failed to install dependencies in ${packageDir}:`,
+      `Failed to install dependencies in ${packageDir}:`,
       error.message
     );
     process.exit(1);
   }
 }
 
-console.log("🎉 All dependencies installed successfully!");
+console.log("All dependencies installed successfully!");

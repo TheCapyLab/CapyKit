@@ -10,18 +10,18 @@ const rootDir = resolve(__dirname, "..");
 
 function showUsage() {
   console.log(`
-🗑️  Delete Package Script
+Delete Package Script
 
 Usage: node scripts/delete-package.js <package-name>
 
 This script will:
-  📁 Remove the package directory
-  📝 Update VS Code workspace file
-  🔧 Remove from build script
-  📦 Remove from pack script
-  📝 Remove scripts from root package.json
-  🚀 Remove from GitHub Actions workflow
-  🛠️  Remove from workspace tasks
+  - Remove the package directory
+  - Update VS Code workspace file
+  - Remove from build script
+  - Remove from pack script
+  - Remove scripts from root package.json
+  - Remove from GitHub Actions workflow
+  - Remove from workspace tasks
 
 Example:
   node scripts/delete-package.js my-package
@@ -30,14 +30,14 @@ Example:
 
 function validatePackageName(packageName) {
   if (!packageName) {
-    console.error("❌ Package name is required");
+    console.error("Package name is required");
     showUsage();
     process.exit(1);
   }
 
   if (!/^[a-z0-9-]+$/.test(packageName)) {
     console.error(
-      "❌ Package name must contain only lowercase letters, numbers, and hyphens"
+      "Package name must contain only lowercase letters, numbers, and hyphens"
     );
     process.exit(1);
   }
@@ -49,7 +49,7 @@ function checkPackageExists(packageName) {
   const packageDir = resolve(rootDir, "packages", packageName);
 
   if (!fs.existsSync(packageDir)) {
-    console.error(`❌ Package "${packageName}" does not exist`);
+    console.error(`Package "${packageName}" does not exist`);
     process.exit(1);
   }
 
@@ -59,9 +59,9 @@ function checkPackageExists(packageName) {
 function deletePackageDirectory(packageDir, packageName) {
   try {
     fs.rmSync(packageDir, { recursive: true, force: true });
-    console.log(`📁 Deleted package directory: ${packageName}`);
+    console.log(`Deleted package directory: ${packageName}`);
   } catch (error) {
-    console.warn(`⚠️  Could not delete package directory: ${error.message}`);
+    console.warn(`Could not delete package directory: ${error.message}`);
   }
 }
 
@@ -102,9 +102,9 @@ function updateWorkspaceFile(packageName) {
       : updatedContent;
 
     fs.writeFileSync(workspaceFile, finalContent);
-    console.log(`📝 Updated workspace file`);
+    console.log(`Updated workspace file`);
   } catch (error) {
-    console.warn(`⚠️  Could not update workspace file: ${error.message}`);
+    console.warn(`Could not update workspace file: ${error.message}`);
   }
 }
 
@@ -119,7 +119,7 @@ function updateBuildScript(packageName) {
       !buildScript.includes(`name: '${packageName}'`) &&
       !buildScript.includes(`name: "${packageName}"`)
     ) {
-      console.log(`🔧 Package not found in build script`);
+      console.log(`Package not found in build script`);
       return;
     }
 
@@ -135,9 +135,9 @@ function updateBuildScript(packageName) {
     buildScript = buildScript.replace(/,(\s*\])/g, "$1");
 
     fs.writeFileSync(buildScriptPath, buildScript);
-    console.log(`🔧 Updated build script`);
+    console.log(`Updated build script`);
   } catch (error) {
-    console.warn(`⚠️  Could not update build script: ${error.message}`);
+    console.warn(`Could not update build script: ${error.message}`);
   }
 }
 
@@ -152,7 +152,7 @@ function updatePackScript(packageName) {
       !packScript.includes(`name: '${packageName}'`) &&
       !packScript.includes(`name: "${packageName}"`)
     ) {
-      console.log(`📦 Package not found in pack script`);
+      console.log(`Package not found in pack script`);
       return;
     }
 
@@ -168,9 +168,9 @@ function updatePackScript(packageName) {
     packScript = packScript.replace(/,(\s*\])/g, "$1");
 
     fs.writeFileSync(packScriptPath, packScript);
-    console.log(`📦 Updated pack script`);
+    console.log(`Updated pack script`);
   } catch (error) {
-    console.warn(`⚠️  Could not update pack script: ${error.message}`);
+    console.warn(`Could not update pack script: ${error.message}`);
   }
 }
 
@@ -188,9 +188,9 @@ function updateRootPackageJson(packageName) {
       packageJsonPath,
       JSON.stringify(packageJson, null, 2) + "\n"
     );
-    console.log(`📝 Updated root package.json scripts`);
+    console.log(`Updated root package.json scripts`);
   } catch (error) {
-    console.warn(`⚠️  Could not update root package.json: ${error.message}`);
+    console.warn(`Could not update root package.json: ${error.message}`);
   }
 }
 
@@ -202,7 +202,7 @@ function updateGitHubWorkflow(packageName) {
 
     // Check if package exists in workflow
     if (!workflow.includes(`"${packageName}"`)) {
-      console.log(`🚀 Package not found in GitHub workflow`);
+      console.log(`Package not found in GitHub workflow`);
       return;
     }
 
@@ -233,9 +233,9 @@ function updateGitHubWorkflow(packageName) {
     }
 
     fs.writeFileSync(workflowPath, workflow);
-    console.log(`🚀 Updated GitHub Actions workflow`);
+    console.log(`Updated GitHub Actions workflow`);
   } catch (error) {
-    console.warn(`⚠️  Could not update GitHub workflow: ${error.message}`);
+    console.warn(`Could not update GitHub workflow: ${error.message}`);
   }
 }
 
@@ -248,9 +248,9 @@ function updateWorkspaceTasks(packageName) {
     // Check if tasks for this package exist
     if (
       !workspaceContent.includes(`🔨 Build ${packageName}`) &&
-      !workspaceContent.includes(`📦 Pack ${packageName}`)
+      !workspaceContent.includes(`Pack ${packageName}`)
     ) {
-      console.log(`🛠️  No package tasks found in workspace`);
+      console.log(`No package tasks found in workspace`);
       return;
     }
 
@@ -286,9 +286,9 @@ function updateWorkspaceTasks(packageName) {
       : updatedContent;
 
     fs.writeFileSync(workspaceFile, finalContent);
-    console.log(`🛠️  Removed workspace tasks for ${packageName}`);
+    console.log(`Removed workspace tasks for ${packageName}`);
   } catch (error) {
-    console.warn(`⚠️  Could not update workspace tasks: ${error.message}`);
+    console.warn(`Could not update workspace tasks: ${error.message}`);
   }
 }
 
@@ -305,7 +305,7 @@ function cleanupArtifacts(packageName) {
       packagePacks.forEach((packFile) => {
         const packPath = resolve(packsDir, packFile);
         fs.unlinkSync(packPath);
-        console.log(`🗑️  Removed pack file: ${packFile}`);
+        console.log(`Removed pack file: ${packFile}`);
       });
     }
 
@@ -320,19 +320,19 @@ function cleanupArtifacts(packageName) {
       packageArtifacts.forEach((artifactFile) => {
         const artifactPath = resolve(artifactsDir, artifactFile);
         fs.unlinkSync(artifactPath);
-        console.log(`🗑️  Removed artifact: ${artifactFile}`);
+        console.log(`Removed artifact: ${artifactFile}`);
       });
     }
   } catch (error) {
-    console.warn(`⚠️  Could not clean up artifacts: ${error.message}`);
+    console.warn(`Could not clean up artifacts: ${error.message}`);
   }
 }
 
 function main() {
   const packageName = process.argv[2];
 
-  console.log("🗑️  Delete Package Script Starting...");
-  console.log("📋 Arguments:", process.argv.slice(2));
+  console.log("Delete Package Script Starting...");
+  console.log("Arguments:", process.argv.slice(2));
 
   if (!packageName) {
     showUsage();
@@ -342,7 +342,7 @@ function main() {
   const validatedName = validatePackageName(packageName);
   const packageDir = checkPackageExists(validatedName);
 
-  console.log(`🗑️  Deleting package "${validatedName}"...`);
+  console.log(`Deleting package "${validatedName}"...`);
 
   // Perform all cleanup operations
   deletePackageDirectory(packageDir, validatedName);
@@ -354,8 +354,8 @@ function main() {
   updateWorkspaceTasks(validatedName);
   cleanupArtifacts(validatedName);
 
-  console.log(`✅ Package "${validatedName}" deleted successfully!`);
-  console.log(`🧹 All references and artifacts have been cleaned up`);
+  console.log(`Package "${validatedName}" deleted successfully!`);
+  console.log(`All references and artifacts have been cleaned up`);
 }
 
 // Check if this script is being run directly

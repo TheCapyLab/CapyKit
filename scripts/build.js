@@ -12,7 +12,8 @@ const rootDir = resolve(__dirname, "..");
 const packages = [
   { name: "capykit", path: "packages/capykit" },
   { name: "core", path: "packages/core" },
-  { name: "composables", path: "packages/composables" }];
+  { name: "composables", path: "packages/composables" },
+];
 
 function buildPackage(packageInfo) {
   const { name, path } = packageInfo;
@@ -76,10 +77,10 @@ function buildPackage(packageInfo) {
     );
     console.log(`Generated dist/package.json for ${name}`);
 
-    console.log(`✅ Built ${name} successfully`);
+    console.log(`Built ${name} successfully`);
     return true;
   } catch (error) {
-    console.error(`❌ Failed to build ${name}:`, error.message);
+    console.error(`Failed to build ${name}:`, error.message);
     return false;
   }
 }
@@ -93,7 +94,7 @@ function main() {
     const packageInfo = packages.find((pkg) => pkg.name === targetPackage);
     if (!packageInfo) {
       console.error(
-        `❌ Package "${targetPackage}" not found. Available packages: ${packages
+        `Package "${targetPackage}" not found. Available packages: ${packages
           .map((p) => p.name)
           .join(", ")}`
       );
@@ -104,7 +105,7 @@ function main() {
     process.exit(success ? 0 : 1);
   } else {
     // Build all packages
-    console.log("🚀 Building all packages...");
+    console.log("Building all packages...");
     let allSucceeded = true;
 
     for (const packageInfo of packages) {
@@ -115,7 +116,7 @@ function main() {
     }
 
     if (allSucceeded) {
-      console.log("\n🎉 All packages built successfully!");
+      console.log("\nAll packages built successfully!");
     } else {
       console.log("\n💥 Some packages failed to build");
       process.exit(1);

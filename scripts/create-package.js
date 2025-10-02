@@ -13,13 +13,11 @@ function createPackage(packageName) {
 
   // Check if package already exists
   if (fs.existsSync(packageDir)) {
-    console.error(
-      `❌ Package "${packageName}" already exists at ${packageDir}`
-    );
+    console.error(`Package "${packageName}" already exists at ${packageDir}`);
     process.exit(1);
   }
 
-  console.log(`🆕 Creating package "${packageName}"...`);
+  console.log(`Creating package "${packageName}"...`);
 
   // Create package directory structure
   fs.mkdirSync(packageDir, { recursive: true });
@@ -110,10 +108,10 @@ export default createSharedConfig({
   // Update workspace tasks
   updateWorkspaceTasks(packageName);
 
-  console.log(`✅ Package "${packageName}" created successfully!`);
-  console.log(`📁 Location: ${packageDir}`);
-  console.log(`🔧 Run "npm run build:${packageName}" to build this package`);
-  console.log(`📦 Run "npm run pack:${packageName}" to pack this package`);
+  console.log(`Package "${packageName}" created successfully!`);
+  console.log(`Location: ${packageDir}`);
+  console.log(`Run "npm run build:${packageName}" to build this package`);
+  console.log(`Run "npm run pack:${packageName}" to pack this package`);
 }
 
 function updateWorkspaceFile(packageName) {
@@ -151,12 +149,12 @@ function updateWorkspaceFile(packageName) {
       );
 
       fs.writeFileSync(workspaceFile, updatedContent);
-      console.log(`📝 Updated workspace file`);
+      console.log(`Updated workspace file`);
     } else {
-      console.log(`📝 Package folder already exists in workspace`);
+      console.log(`Package folder already exists in workspace`);
     }
   } catch (error) {
-    console.warn(`⚠️  Could not update workspace file: ${error.message}`);
+    console.warn(`Could not update workspace file: ${error.message}`);
   }
 }
 
@@ -171,7 +169,7 @@ function updateBuildScript(packageName) {
       buildScript.includes(`name: '${packageName}'`) ||
       buildScript.includes(`name: "${packageName}"`)
     ) {
-      console.log(`🔧 Package already exists in build script`);
+      console.log(`Package already exists in build script`);
       return;
     }
 
@@ -191,10 +189,10 @@ function updateBuildScript(packageName) {
       buildScript = buildScript.replace(packagesRegex, updatedPackages);
 
       fs.writeFileSync(buildScriptPath, buildScript);
-      console.log(`🔧 Updated build script`);
+      console.log(`Updated build script`);
     }
   } catch (error) {
-    console.warn(`⚠️  Could not update build script: ${error.message}`);
+    console.warn(`Could not update build script: ${error.message}`);
   }
 }
 
@@ -209,7 +207,7 @@ function updatePackScript(packageName) {
       packScript.includes(`name: '${packageName}'`) ||
       packScript.includes(`name: "${packageName}"`)
     ) {
-      console.log(`📦 Package already exists in pack script`);
+      console.log(`Package already exists in pack script`);
       return;
     }
 
@@ -229,10 +227,10 @@ function updatePackScript(packageName) {
       packScript = packScript.replace(packagesRegex, updatedPackages);
 
       fs.writeFileSync(packScriptPath, packScript);
-      console.log(`📦 Updated pack script`);
+      console.log(`Updated pack script`);
     }
   } catch (error) {
-    console.warn(`⚠️  Could not update pack script: ${error.message}`);
+    console.warn(`Could not update pack script: ${error.message}`);
   }
 }
 
@@ -259,9 +257,9 @@ function updateRootPackageJson(packageName) {
     }
 
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    console.log(`📝 Updated root package.json scripts`);
+    console.log(`Updated root package.json scripts`);
   } catch (error) {
-    console.warn(`⚠️  Could not update root package.json: ${error.message}`);
+    console.warn(`Could not update root package.json: ${error.message}`);
   }
 }
 
@@ -273,7 +271,7 @@ function updateGitHubWorkflow(packageName) {
 
     // Check if package already exists in options
     if (workflow.includes(`"${packageName}"`)) {
-      console.log(`🚀 Package already exists in GitHub workflow`);
+      console.log(`Package already exists in GitHub workflow`);
       return;
     }
 
@@ -315,9 +313,9 @@ function updateGitHubWorkflow(packageName) {
     }
 
     fs.writeFileSync(workflowPath, workflow);
-    console.log(`🚀 Updated GitHub Actions workflow`);
+    console.log(`Updated GitHub Actions workflow`);
   } catch (error) {
-    console.warn(`⚠️  Could not update GitHub workflow: ${error.message}`);
+    console.warn(`Could not update GitHub workflow: ${error.message}`);
   }
 }
 
@@ -329,7 +327,7 @@ function updateWorkspaceTasks(packageName) {
 
     // Check if tasks for this package already exist
     if (workspaceContent.includes(`🔨 Build ${packageName}`)) {
-      console.log(`🛠️  Package tasks already exist in workspace`);
+      console.log(`Package tasks already exist in workspace`);
       return;
     }
 
@@ -343,7 +341,7 @@ function updateWorkspaceTasks(packageName) {
     try {
       workspace = JSON.parse(cleanContent);
     } catch (parseError) {
-      console.warn(`⚠️  Could not parse workspace file: ${parseError.message}`);
+      console.warn(`Could not parse workspace file: ${parseError.message}`);
       return;
     }
 
@@ -370,7 +368,7 @@ function updateWorkspaceTasks(packageName) {
 
     // Create pack task for the new package
     const packTask = {
-      label: `📦 Pack ${packageName}`,
+      label: `Pack ${packageName}`,
       type: "shell",
       command: "npm",
       args: ["run", `pack:${packageName}`],
@@ -403,9 +401,9 @@ function updateWorkspaceTasks(packageName) {
       : updatedContent;
 
     fs.writeFileSync(workspaceFile, finalContent);
-    console.log(`🛠️  Added workspace tasks for ${packageName}`);
+    console.log(`Added workspace tasks for ${packageName}`);
   } catch (error) {
-    console.warn(`⚠️  Could not update workspace tasks: ${error.message}`);
+    console.warn(`Could not update workspace tasks: ${error.message}`);
   }
 }
 
@@ -414,7 +412,7 @@ function main() {
   const packageName = args[0];
 
   if (!packageName) {
-    console.error("❌ Please provide a package name");
+    console.error("Please provide a package name");
     console.log("Usage: node scripts/create-package.js <package-name>");
     process.exit(1);
   }
@@ -422,7 +420,7 @@ function main() {
   // Validate package name
   if (!/^[a-z][a-z0-9-]*$/.test(packageName)) {
     console.error(
-      "❌ Package name must start with a letter and contain only lowercase letters, numbers, and hyphens"
+      "Package name must start with a letter and contain only lowercase letters, numbers, and hyphens"
     );
     process.exit(1);
   }

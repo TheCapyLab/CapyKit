@@ -38,7 +38,7 @@ if (fs.existsSync(componentDir)) {
   process.exit(1);
 }
 
-console.log(`🚀 Creating component: ${componentName}`);
+console.log(`Creating component: ${componentName}`);
 
 // Create component directory
 fs.mkdirSync(componentDir, { recursive: true });
@@ -112,17 +112,17 @@ try {
   console.log(`Location: ./${componentDirName}/`);
 
   // Automatically regenerate exports
-  console.log(`\n🔄 Regenerating exports...`);
+  console.log(`\nRegenerating exports...`);
   try {
     const output = execSync("node scripts/generate-exports.js", {
       cwd: packageRoot,
       encoding: "utf-8",
     });
     console.log(output);
-    console.log(`✅ Exports regenerated successfully!`);
+    console.log(`Exports regenerated successfully!`);
   } catch (error) {
-    console.error("❌ Error regenerating exports:", error.message);
-    console.log("💡 Please run manually: node scripts/generate-exports.js");
+    console.error("Error regenerating exports:", error.message);
+    console.log("Please run manually: node scripts/generate-exports.js");
   }
 
   console.log(`\nNext steps:`);

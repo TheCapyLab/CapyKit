@@ -12,10 +12,10 @@ const __dirname = path.dirname(__filename);
 // 1. Run npm ls in any folder with package.json
 // -----------------
 function checkDuplicatePackages(dir) {
-  console.log(`\n🔍 Checking duplicate packages in: ${dir}`);
+  console.log(`\nChecking duplicate packages in: ${dir}`);
 
   if (!existsSync(path.join(dir, "package.json"))) {
-    console.log("⚠️ No package.json found, skipping.");
+    console.log("No package.json found, skipping.");
     return;
   }
 
@@ -43,15 +43,15 @@ function checkDuplicatePackages(dir) {
       ([_, versions]) => versions.size > 1
     );
     if (duplicates.length === 0) {
-      console.log("✅ No duplicate packages found.");
+      console.log("No duplicate packages found.");
     } else {
-      console.log("⚠️ Found duplicate packages:");
+      console.log("Found duplicate packages:");
       duplicates.forEach(([name, versions]) => {
         console.log(` - ${name}: [${Array.from(versions).join(", ")}]`);
       });
     }
   } catch (err) {
-    console.error("❌ Failed to run `npm ls` in", dir);
+    console.error("Failed to run `npm ls` in", dir);
   }
 }
 
@@ -62,12 +62,12 @@ function checkTsConfigPaths(dir) {
   const tsconfigPath = path.join(dir, "tsconfig.json");
   if (!existsSync(tsconfigPath)) return;
 
-  console.log(`\n🔍 Checking path aliases in: ${tsconfigPath}`);
+  console.log(`\nChecking path aliases in: ${tsconfigPath}`);
 
   const tsconfig = JSON.parse(readFileSync(tsconfigPath, "utf8"));
 
   if (!tsconfig.compilerOptions || !tsconfig.compilerOptions.paths) {
-    console.log("✅ No custom path aliases found.");
+    console.log("No custom path aliases found.");
     return;
   }
 
@@ -91,7 +91,7 @@ function checkTsConfigPaths(dir) {
   }
 
   if (conflicts.length === 0) {
-    console.log("✅ No conflicting path aliases found.");
+    console.log("No conflicting path aliases found.");
   } else {
     console.log("⚠️ Found conflicting path aliases:");
     conflicts.forEach((c) => console.log(` - ${c}`));

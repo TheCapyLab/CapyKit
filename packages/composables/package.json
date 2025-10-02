@@ -11,11 +11,25 @@
       "import": "./index.esm.js",
       "require": "./index.cjs.js",
       "default": "./index.esm.js"
+    },
+    "./useReducedMotion": {
+      "types": "./useReducedMotion/index.d.ts",
+      "import": "./useReducedMotion/index.esm.js",
+      "require": "./useReducedMotion/index.cjs.js",
+      "default": "./useReducedMotion/index.esm.js"
+    },
+    "./useTheme": {
+      "types": "./useTheme/index.d.ts",
+      "import": "./useTheme/index.esm.js",
+      "require": "./useTheme/index.cjs.js",
+      "default": "./useTheme/index.esm.js"
     }
   },
   "scripts": {
     "build": "vite build",
-    "composable:add": "node ./scripts/add-composable.js"
+    "composable:add": "node ./scripts/add-composable.js",
+    "composable:delete": "node ./scripts/delete-composable.js",
+    "exports:generate": "node ./scripts/generate-exports.js"
   },
   "description": "Composables used by the capykit UI Library",
   "author": "TheCapyLab",
