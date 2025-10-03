@@ -1,8 +1,11 @@
 import { App } from "vue";
+import { ThemeManager } from "./themeManager";
+import type { ThemeOptions } from "./theme";
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $log?: LogFn;
+    $theme?: ThemeManager;
   }
 }
 
@@ -15,6 +18,7 @@ export interface CapyKitPluginOptions {
   registerComponents?: boolean;
   log?: boolean;
   logger?: LogFn;
+  theme?: ThemeOptions;
 }
 
 export default {
@@ -24,13 +28,30 @@ export default {
     const logger = options.log ? options.logger || basicLogger : () => {};
     logger("Installing CapyKit plugin...", "info");
 
+    // Initialize theme manager
+    const themeManager = new ThemeManager(options.theme);
+
     registerLoggerFunction(app, logger, options.log);
+    registerThemeManager(app, themeManager, logger);
+
     if (options.registerComponents) registerAllComponents(app, logger);
   },
 };
 
 const registerAllComponents = (app: App, logger: LogFn) => {
   logger("Registering all components...", "info");
+};
+
+const registerThemeManager = (
+  app: App,
+  themeManager: ThemeManager,
+  logger: LogFn
+) => {
+  logger("Registering theme manager...", "info");
+  app.config.globalProperties.$theme = themeManager;
+
+  // Provide theme manager for composition API
+  app.provide("themeManager", themeManager);
 };
 
 const registerLoggerFunction = (

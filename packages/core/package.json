@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && node ./scripts/copy-themes.js",
     "exports:generate": "node ./scripts/generate-exports.js"
   },
   "author": "TheCapyLab",

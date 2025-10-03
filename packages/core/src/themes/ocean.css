@@ -1,0 +1,77 @@
+/**
+ * Example Custom Theme - Ocean Blue
+ * Shows how to create custom themes with CSS variables
+ */
+
+:root[data-theme="ocean"] {
+  /* Light theme colors */
+  --ck-color-primary: #0ea5e9;
+  --ck-color-secondary: #0f766e;
+  --ck-color-background: #f0f9ff;
+  --ck-color-surface: #ffffff;
+  --ck-color-text: #0c4a6e;
+  --ck-color-text-secondary: #0369a1;
+  --ck-color-border: #bae6fd;
+  --ck-color-success: #059669;
+  --ck-color-warning: #d97706;
+  --ck-color-error: #dc2626;
+  --ck-color-info: #0ea5e9;
+
+  /* Custom shadows with blue tint */
+  --ck-shadow-sm: 0 1px 2px 0 rgb(14 165 233 / 0.1);
+  --ck-shadow-md: 0 4px 6px -1px rgb(14 165 233 / 0.15),
+    0 2px 4px -2px rgb(14 165 233 / 0.1);
+  --ck-shadow-lg: 0 10px 15px -3px rgb(14 165 233 / 0.2),
+    0 4px 6px -4px rgb(14 165 233 / 0.1);
+  --ck-shadow-xl: 0 20px 25px -5px rgb(14 165 233 / 0.25),
+    0 8px 10px -6px rgb(14 165 233 / 0.1);
+}
+
+/* Dark theme colors for ocean theme */
+:root[data-theme="ocean"][data-color-scheme="dark"] {
+  --ck-color-primary: #38bdf8;
+  --ck-color-secondary: #14b8a6;
+  --ck-color-background: #0c4a6e;
+  --ck-color-surface: #075985;
+  --ck-color-text: #e0f2fe;
+  --ck-color-text-secondary: #7dd3fc;
+  --ck-color-border: #0369a1;
+  --ck-color-success: #10b981;
+  --ck-color-warning: #f59e0b;
+  --ck-color-error: #f87171;
+  --ck-color-info: #38bdf8;
+
+  /* Dark theme shadows */
+  --ck-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --ck-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3),
+    0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --ck-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3),
+    0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --ck-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3),
+    0 8px 10px -6px rgb(0 0 0 / 0.3);
+}
+
+/* Auto color scheme support */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="ocean"][data-color-scheme="auto"] {
+    --ck-color-primary: #38bdf8;
+    --ck-color-secondary: #14b8a6;
+    --ck-color-background: #0c4a6e;
+    --ck-color-surface: #075985;
+    --ck-color-text: #e0f2fe;
+    --ck-color-text-secondary: #7dd3fc;
+    --ck-color-border: #0369a1;
+    --ck-color-success: #10b981;
+    --ck-color-warning: #f59e0b;
+    --ck-color-error: #f87171;
+    --ck-color-info: #38bdf8;
+
+    --ck-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --ck-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --ck-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3),
+      0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --ck-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3),
+      0 8px 10px -6px rgb(0 0 0 / 0.3);
+  }
+}
